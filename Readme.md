@@ -7,6 +7,9 @@ I’ve created a pipeline to fill a MySQL database from TMDB through a series of
 Next, I would like to create a movies game app that can have some interactive games where users are presented with two actors to guess which one has been first billed in more movies. At this point, I think I will use Flask and Bootstrap as Frameworks and will be supported by MySQL.
 
 Future steps would include:
+	
 	•	Expanding to have users log in and keep track of wins and losses
+	
 	•	Add additional games including games where users guess who has been in more movies, how many movies have two actors been in, and whats an actor’s most popular genre. 
+	
 	•	Develop a pipeline for updating the database with new releases
