@@ -1,19 +1,18 @@
 import requests
-import json
 from sqlalchemy import create_engine
 import os
 import pandas as pd
 
 api_key=os.getenv('API_KEY')
+username = os.getenv('MYSQL_user')
 pw=os.getenv('MYSQL')
-str_sql='mysql+mysqlconnector://root:'+pw+'@localhost/movies'
+str_sql='mysql+mysqlconnector://'+username+':'+ pw +'@localhost/movies'
 engine=create_engine(str_sql)
 with engine.connect() as connection:
     con = connection.execute
 
 # Loop to prepare actor name for API request
 def request_actor_id(actor):
-    #actor = 'Jack Nicholson'
     actor_name = ''
     for i in actor:
         if i == ' ':
@@ -22,9 +21,9 @@ def request_actor_id(actor):
         else:
             actor_name += i
 
+    #first api request to get the actor id number
     actor_request_url = "https://api.themoviedb.org/3/search/person?api_key=" + str(api_key)+"&language=en-US&query=" + str(
         actor_name) + "&include_adult=false"
-
     response = requests.request("GET", actor_request_url)
 
     # reading the response and pulling out the list in the dictionary
@@ -58,15 +57,17 @@ def request_actor_id(actor):
     genres = genres.explode('genre_ids')
     movies = movies.drop(["genre_ids"], axis=1)
 
+    #rename character and order columns and add an actor and movies column as the primary ke
+    movies = movies.rename(columns={"character": "movie_character", "order": "billing_order"})
+    movies['actor_and_movie'] = movies[['actor_name', 'id']].apply(lambda x: ' '.join(x.map(str)), axis=1)
+
     #add the movies and genre dataframes into mysql
-    movies.to_sql('movies', con=engine, if_exists='append')
-    genres.to_sql('genres', con=engine, if_exists='append')
+    movies.to_sql('movies', con=engine, if_exists='append', index=False)
+    genres.to_sql('genres', con=engine, if_exists='append', index=False)
 
 
 if __name__ == "__main__":
-    list = ['Rachel Weisz','Jessica Chastain','Julia Roberts','Nicole Kidman',
-            'Reese Witherspoon','Sarah Paulson','Jessica Lange','Anne Hathaway',
-            'Sigourney Weaver','Scarlett Johansson','Emilia Clarke','Jodie Foster',
-            'Michelle Pfeiffer','Charlize Theron']
+    #by providing a list of actors, I can add hundreds of records to the database quickly
+    list = ['Tim Roth', 'Bruce Willis', 'Marylin Monroe', 'Sam Rockwell', 'Alan Arkin','Hervey Keitel']
     for i in list:
         request_actor_id(i)
