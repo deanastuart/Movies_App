@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<style>
+    body {background-color: DarkCyan;}
+    h1   {color: Gainsboro;}
+    p    {color: Gainsboro;}
+    table {color: Gainsboro;}
+</style>
+    {% block head %} {% endblock %}
+</head>
+<body>
+    {% block body %} {% endblock %}
+</body>
+<footer> {% block footer %} {% endblock %}
+</footer>
+</html>

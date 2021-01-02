@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="content-section">
+        <h1 style="text-align: center">Let's play!</h1>
+        <p style="text-align: center"> Guess which actor has been top billed in more movies</p>
+
+</div>
+<table style="border-collapse: collapse; border: none;">
+ <form action="/topbilled" method="post">
+         <tr style="border: none;">
+         <th style="border :none;">{{ actor1 }}</th>
+         <th style="border :none;">{{ actor2 }}</th>
+         </tr>
+                <tr style="border: none;">
+                 <td style="border: none;"><input type="submit" name="actor_1" value="I'm the bigger star!"></td>
+                 <td style="border: none;"><input type="submit" name="actor_2" value="I'm the bigger star!"></td>
+                </tr>
+</form>
+</table>
+
+<p style="text-align: center">{{ result }}</p>
+ <form action="/topbilled" method="post">
+<p style="text-align:center"><input type="submit" name="play_again" value="Play again?"></p>
+ </form>
+
+
+{% endblock %}

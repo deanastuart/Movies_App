@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Top Billed</title>
+{% endblock %}
+
+{% block body %}
+<div style="text-align: center">
+<h1> Welcome to Top Billed</h1>
+       <p> This game was developed though creating a MySQL database through an API request pipeline.</p>
+       <p> Thank to the The Movie Database for providing the dats used to fill my database</p>
+</div>
+       <div class="content", style="text-align: center">
+       <form action="/" method="post">
+              <button class="btn btn-primary" href="/topbilled" role="button"> Play Top Billed</button>
+       </form>
+              <p></p>
+</div>
+
+{% endblock %}
+{% block footer %}
+<div style="text-align: center">
+<footer id="footer"> <img src="{{url_for('static', filename='logo2.svg')}}" width="20%" height="20%"/>
+</footer>
+</div>
+{% endblock %}
