@@ -67,7 +67,7 @@ def request_actor_id(actor):
 
 
 if __name__ == "__main__":
-    #by providing a list of actors, I can add hundreds of records to the database quickly
-    list = ['Tim Roth', 'Bruce Willis', 'Marylin Monroe', 'Sam Rockwell', 'Alan Arkin','Hervey Keitel']
+    #by providing a list of actors, I can add
+    list = ['Tim Roth', 'Bruce Willis', 'Marylin Monroe']
     for i in list:
         request_actor_id(i)

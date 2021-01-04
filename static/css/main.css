@@ -1,5 +1,5 @@
 body, html {
-    background-color: navy;
+    background-color: Dark Cyan;
     margin: 0;
     font-family: sans-serif;
     font-collapse: white
@@ -7,7 +7,7 @@ body, html {
 
 .content {
     margin: 0 auto;
-    width: 400px;
+    width: 400px;6
 }
 
 table, td, th {
