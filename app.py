@@ -15,7 +15,7 @@ database = os.environ['cleardb_db']
 databaseurl = os.environ['CLEARDB_DATABASE_URL']
 SQLALCHEMY_DATABASE_URI = 'mysql://' + username + ":" + pw + host + database
 # engine = create_engine('mysql+mysqlconnector://'+username+':'+ pw +'@localhost/movies', pool_recycle=3600)
-engine = create_engine(databaseurl, pool_pre_ping=True)
+engine = create_engine(databaseurl, pool_recycle=3600, pool_pre_ping=True)
 with engine.connect() as connection:
     con = connection.execute
 
