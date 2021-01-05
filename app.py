@@ -63,4 +63,4 @@ def topbilled():
         return render_template('topbilled.html', actor1=actor1, actor2=actor2)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
