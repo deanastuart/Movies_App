@@ -1,7 +1,7 @@
 import requests
 from sqlalchemy import create_engine
 import os
-import pandas as pd
+# import pandas as pd
 
 api_key=os.getenv('API_KEY')
 username = os.getenv('MYSQL_user')
