@@ -11,6 +11,6 @@ host = 'us-cdbr-east-02.cleardb.com'
 database = '/heroku_d4bc70f96ca7095?reconnect=true'
 SQLALCHEMY_DATABASE_URI = 'mysql://' + username + ":" + pw + host + database
 
-mysql://bb1959290f76e4:ee34b76f@us-cdbr-east-02.cleardb.com/heroku_d4bc70f96ca7095?reconnect=true
+# mysql://bb1959290f76e4:ee34b76f@us-cdbr-east-02.cleardb.com/heroku_d4bc70f96ca7095?reconnect=true
 app.config['SQLALCHEMY_DATABASE_URI'] = SQLALCHEMY_DATABASE_URI
 app.secret_key ="ZipcodeRocks"
