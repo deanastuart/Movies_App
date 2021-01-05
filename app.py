@@ -8,7 +8,13 @@ from config import *
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
-engine = create_engine('mysql+mysqlconnector://'+username+':'+ pw +'@localhost/movies', pool_recycle=3600)
+username = os.getenv('cleardb_username')
+pw = os.getenv('cleardb_pw')
+host = os.getenv('cleardb_host')
+database = os.getenv('cleardb_db')
+SQLALCHEMY_DATABASE_URI = 'mysql://' + username + ":" + pw + host + database
+# engine = create_engine('mysql+mysqlconnector://'+username+':'+ pw +'@localhost/movies', pool_recycle=3600)
+engine = create_engine('mysql://' + username + ":" + pw + host + database, pool_recycle=3600)
 with engine.connect() as connection:
     con = connection.execute
 
