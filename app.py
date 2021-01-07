@@ -25,7 +25,6 @@ app.session = scoped_session(SessionLocal, scopefunc=_app_ctx_stack.__ident_func
 def request_db():
     result_list = [p for (p,) in app.session.query(distinct(Movies.actor_name)).order_by(func.rand()).limit(2)]
     session['result_list'] = result_list
-    session.close()
 
 
 @app.route('/', methods=['POST','GET'])
