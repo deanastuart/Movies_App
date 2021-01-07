@@ -25,6 +25,8 @@ app.session = scoped_session(SessionLocal, scopefunc=_app_ctx_stack.__ident_func
 def request_db():
     result_list = [p for (p,) in app.session.query(distinct(Movies.actor_name)).order_by(func.rand()).limit(2)]
     session['result_list'] = result_list
+    session.close()
+
 
 @app.route('/', methods=['POST','GET'])
 def index():
@@ -43,6 +45,7 @@ def topbilled():
     count1 = query1.count()
     query2 = app.session.query(Movies).filter(Movies.billing_order == 0, Movies.actor_name == actor2)
     count2 = query2.count()
+    session.close()
     if request.method == 'POST':
         if 'actor_1' in request.form:
             if count1 > count2:
