@@ -7,6 +7,7 @@ from database import *
 from config import *
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
 
 username = os.environ['cleardb_username']
 pw = os.environ['cleardb_pw']
@@ -21,11 +22,13 @@ with engine.connect() as connection:
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 app.session = scoped_session(SessionLocal, scopefunc=_app_ctx_stack.__ident_func__)
+my_session = Session()
+
 
 def request_db():
     result_list = [p for (p,) in app.session.query(distinct(Movies.actor_name)).order_by(func.rand()).limit(2)]
     session['result_list'] = result_list
-    SessionLocal.session.close()
+    my_session.close()
 
 
 @app.route('/', methods=['POST','GET'])
@@ -45,7 +48,7 @@ def topbilled():
     count1 = query1.count()
     query2 = app.session.query(Movies).filter(Movies.billing_order == 0, Movies.actor_name == actor2)
     count2 = query2.count()
-    SessionLocal.session.close()
+    my_session.close()
     if request.method == 'POST':
         if 'actor_1' in request.form:
             if count1 > count2:
