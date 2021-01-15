@@ -1,6 +1,6 @@
 # Movies Games Web App
 
-![](index_page_image.png)
+![](images/index_page_image.png)
 
 I have developed a movie game where players are presented with two actors and guess who has been top billed in more movies.
 
@@ -11,8 +11,9 @@ I’ve created a pipeline to fill a MySQL database from TMDB through a series of
 ## The next steps in my apps include:
 
  - [x] Hosting the website on heroku: explore my app at https://frozen-wave-08819.herokuapp.com/
+ - [ ] Provide more information about actors in the Top Billed game
  - [ ] Expanding to have users log in and keep track of wins and losses
  - [ ] Add additional games including game where users guess who has been in more movies total, how many movies have two actors been in, and whats an actor’s most popular genre. 
  - [ ] Develop a pipeline for updating the database with new releases
  
- ![](top_billed_image.png)
+ ![](images/top_billed_image.png)
