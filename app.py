@@ -26,6 +26,7 @@ app.session = scoped_session(SessionLocal, scopefunc=_app_ctx_stack.__ident_func
 
 
 def request_db():
+    #queries for 2 random actor names in the database and saves them as session
     result_list = [p for (p,) in app.session.query(distinct(Movies.actor_name)).order_by(func.rand()).limit(2)]
     session['result_list'] = result_list
     app.session.close()
@@ -42,13 +43,18 @@ def index():
 @app.route('/topbilled', methods=['POST','GET'])
 def topbilled():
     result_list = session.get('result_list')
+    #produces actor 1 and actor 2 from the random actors that were created
     actor1 = result_list[0]
     actor2 = result_list[1]
+
+    #queries the database to get the count of top billed names for actor1 and actor2
     query1 = app.session.query(Movies).filter(Movies.billing_order == 0, Movies.actor_name == actor1)
     count1 = query1.count()
     query2 = app.session.query(Movies).filter(Movies.billing_order == 0, Movies.actor_name == actor2)
     count2 = query2.count()
     app.session.close()
+
+    #logic behind the user guessing which actor has been in more top billed movies
     if request.method == 'POST':
         if 'actor_1' in request.form:
             if count1 > count2:
